@@ -1,6 +1,6 @@
 package models
 
-import "go-jobseeker-assesment-fullstack/initializers"
+import "go-jobseeker-assesment-api/initializers"
 
 type T_Candidate struct {
 	Candidate_ID uint   `gorm:"primary_key" json:"candidate_id"`

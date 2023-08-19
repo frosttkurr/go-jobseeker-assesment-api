@@ -1,4 +1,4 @@
-module go-jobseeker-assesment-fullstack
+module go-jobseeker-assesment-api
 
 go 1.19
 

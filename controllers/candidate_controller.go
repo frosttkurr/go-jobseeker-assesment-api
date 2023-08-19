@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"go-jobseeker-assesment-fullstack/models"
+	"go-jobseeker-assesment-api/models"
 
 	"github.com/gin-gonic/gin"
 )
