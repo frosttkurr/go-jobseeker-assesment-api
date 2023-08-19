@@ -80,6 +80,7 @@ func CreateCandidate(c *gin.Context) {
 				"message": "Failed to bind body request",
 			},
 		})
+		return
 	}
 
 	if err := models.InsertCandidate(request_candidate); err != nil {
@@ -89,6 +90,7 @@ func CreateCandidate(c *gin.Context) {
 				"message": "Failed to insert new data",
 			},
 		})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

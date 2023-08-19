@@ -1,16 +1,21 @@
 package models
 
-import "go-jobseeker-assesment-api/initializers"
+import (
+	"errors"
+	"go-jobseeker-assesment-api/initializers"
+
+	"gorm.io/gorm"
+)
 
 type T_Candidate struct {
 	Candidate_ID uint   `gorm:"primary_key" json:"candidate_id"`
-	Email        string `gorm:"type:varchar(255);unique_index;not null" json:"email"`
+	Email        string `gorm:"type:varchar(255);unique_index;not null" json:"email" validate:"required"`
 	Phone_Number string `gorm:"type:varchar(20);unique_index" json:"phone_number"`
-	Full_Name    string `gorm:"type:varchar(255);not null" json:"full_name"`
-	DOB          string `gorm:"type:varchar(10)" json:"dob"`
-	POB          string `gorm:"type:varchar(255)" json:"pob"`
-	Gender       string `gorm:"type:char(1);check:gender IN ('F', 'M')" json:"gender"`
-	Year_Exp     string `gorm:"type:varchar(10);not null" json:"year_exp"`
+	Full_Name    string `gorm:"type:varchar(255);not null" json:"full_name" validate:"required"`
+	DOB          string `gorm:"type:varchar(10)" json:"dob" validate:"required"`
+	POB          string `gorm:"type:varchar(255)" json:"pob" validate:"required"`
+	Gender       string `gorm:"type:char(1);check:gender IN ('F', 'M')" json:"gender" validate:"required"`
+	Year_Exp     string `gorm:"type:varchar(10);not null" json:"year_exp" validate:"required"`
 	Last_Salary  string `gorm:"type:varchar(255)" json:"last_salary"`
 }
 
@@ -31,6 +36,27 @@ func FindCandidate(candidate_id string) (result T_Candidate, err error) {
 }
 
 func InsertCandidate(data T_Candidate) (err error) {
+	var db *gorm.DB
+	var count_email, count_phone_number int64
+
+	db = initializers.DB.Raw("SELECT * FROM t_candidate WHERE email = ?", data.Email).Count(&count_email)
+	if db.Error != nil {
+		return db.Error
+	}
+
+	if count_email > 0 {
+		return errors.New("ERROR: Email must be unique")
+	}
+
+	db = initializers.DB.Raw("SELECT * FROM t_candidate WHERE phone_number = ?", data.Phone_Number).Count(&count_phone_number)
+	if db.Error != nil {
+		return db.Error
+	}
+
+	if count_phone_number > 0 {
+		return errors.New("ERROR: Email must be unique")
+	}
+
 	candidate := T_Candidate{
 		Email:        data.Email,
 		Phone_Number: data.Phone_Number,
