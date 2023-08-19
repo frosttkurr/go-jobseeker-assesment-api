@@ -21,3 +21,11 @@ func GetCandidates() (results []T_Candidate, err error) {
 	}
 	return results, err
 }
+
+func FindCandidates(candidate_id string) (result T_Candidate, err error) {
+	db := initializers.DB.Raw("SELECT * FROM t_candidate WHERE candidate_id = ?", candidate_id).Scan(&result)
+	if db.Error != nil {
+		err = db.Error
+	}
+	return result, err
+}

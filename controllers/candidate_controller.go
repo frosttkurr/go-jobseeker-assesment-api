@@ -36,3 +36,35 @@ func IndexCandidates(c *gin.Context) {
 		})
 	}
 }
+
+func ShowCandidates(c *gin.Context) {
+	id := c.Param("id")
+	candidate, err := models.FindCandidates(id)
+
+	if err == nil {
+		switch candidate.Candidate_ID {
+		case 0:
+			c.JSON(204, gin.H{
+				"meta": gin.H{
+					"status":  204,
+					"message": "No data found",
+				},
+			})
+		default:
+			c.JSON(200, gin.H{
+				"meta": gin.H{
+					"status":  200,
+					"message": "Successfully retrieve data",
+				},
+				"result": candidate,
+			})
+		}
+	} else {
+		c.JSON(500, gin.H{
+			"meta": gin.H{
+				"status":  500,
+				"message": "Failed to retrieve data",
+			},
+		})
+	}
+}
