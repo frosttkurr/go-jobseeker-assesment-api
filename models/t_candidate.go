@@ -36,7 +36,7 @@ func FindCandidate(candidate_id string) (result T_Candidate, err error) {
 	return result, err
 }
 
-func InsertCandidate(data T_Candidate) (err error) {
+func dataValidator(data T_Candidate) (err error) {
 	var db *gorm.DB
 	var count_email, count_phone_number int64
 
@@ -65,6 +65,14 @@ func InsertCandidate(data T_Candidate) (err error) {
 
 	if data.Gender != "M" && data.Gender != "F" {
 		return errors.New("ERROR: Gender must be male (M) or female (F)")
+	}
+
+	return nil
+}
+
+func InsertCandidate(data T_Candidate) (err error) {
+	if err := dataValidator(data); err != nil {
+		return err
 	}
 
 	candidate := T_Candidate{
