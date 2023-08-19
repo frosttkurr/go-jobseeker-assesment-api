@@ -22,6 +22,7 @@ func main() {
 			candidates.GET("/", controllers.IndexCandidates)
 			candidates.GET("/:id", controllers.ShowCandidate)
 			candidates.POST("/", controllers.CreateCandidate)
+			candidates.PUT("/:id", controllers.UpdateCandidate)
 		}
 	}
 

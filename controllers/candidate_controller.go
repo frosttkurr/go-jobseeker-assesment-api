@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"go-jobseeker-assesment-api/helpers"
 	"go-jobseeker-assesment-api/models"
 	"net/http"
 
@@ -40,7 +41,7 @@ func IndexCandidates(c *gin.Context) {
 
 func ShowCandidate(c *gin.Context) {
 	id := c.Param("id")
-	candidate, err := models.FindCandidate(id)
+	candidate, err := models.FindCandidate(helpers.StringToNumber(id))
 
 	if err == nil {
 		switch candidate.Candidate_ID {
@@ -84,6 +85,38 @@ func CreateCandidate(c *gin.Context) {
 	}
 
 	if err := models.InsertCandidate(request_candidate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"meta": gin.H{
+				"status":  http.StatusBadRequest,
+				"message": err.Error(),
+			},
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"meta": gin.H{
+			"status":  http.StatusOK,
+			"message": "Successfully insert new data",
+		},
+	})
+}
+
+func UpdateCandidate(c *gin.Context) {
+	var request_candidate models.T_Candidate
+	id := c.Param("id")
+
+	if err := c.ShouldBindJSON(&request_candidate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"meta": gin.H{
+				"status":  http.StatusBadRequest,
+				"message": err.Error(),
+			},
+		})
+		return
+	}
+
+	if err := models.UpdateCandidate(helpers.StringToNumber(id), request_candidate); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"meta": gin.H{
 				"status":  http.StatusBadRequest,
