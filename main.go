@@ -19,7 +19,7 @@ func main() {
 	{
 		candidates := api.Group("/candidates")
 		{
-			candidates.GET("/", controllers.Index)
+			candidates.GET("/", controllers.IndexCandidates)
 		}
 	}
 

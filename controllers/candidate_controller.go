@@ -6,26 +6,33 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Index(c *gin.Context) {
-	var response gin.H
+func IndexCandidates(c *gin.Context) {
 	candidates, err := models.GetCandidates()
 
 	if err == nil {
-		response = gin.H{
-			"meta": gin.H{
-				"status":  200,
-				"message": "Successfully get data",
-			},
-			"result": candidates,
+		switch {
+		case len(candidates) <= 0:
+			c.JSON(204, gin.H{
+				"meta": gin.H{
+					"status":  204,
+					"message": "No data found",
+				},
+			})
+		default:
+			c.JSON(200, gin.H{
+				"meta": gin.H{
+					"status":  200,
+					"message": "Successfully retrieve data",
+				},
+				"result": candidates,
+			})
 		}
-		c.JSON(200, response)
 	} else {
-		response = gin.H{
+		c.JSON(500, gin.H{
 			"meta": gin.H{
 				"status":  500,
-				"message": "Failed to get data",
+				"message": "Failed to retrieve data",
 			},
-		}
-		c.JSON(500, response)
+		})
 	}
 }
