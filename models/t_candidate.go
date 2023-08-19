@@ -39,7 +39,7 @@ func InsertCandidate(data T_Candidate) (err error) {
 	var db *gorm.DB
 	var count_email, count_phone_number int64
 
-	db = initializers.DB.Raw("SELECT * FROM t_candidate WHERE email = ?", data.Email).Count(&count_email)
+	db = initializers.DB.Raw("SELECT COUNT(candidate_id) AS id FROM t_candidate WHERE email = ?", data.Email).Count(&count_email)
 	if db.Error != nil {
 		return db.Error
 	}
@@ -48,13 +48,13 @@ func InsertCandidate(data T_Candidate) (err error) {
 		return errors.New("ERROR: Email must be unique")
 	}
 
-	db = initializers.DB.Raw("SELECT * FROM t_candidate WHERE phone_number = ?", data.Phone_Number).Count(&count_phone_number)
+	db = initializers.DB.Raw("SELECT COUNT(candidate_id) AS id FROM t_candidate WHERE phone_number = ?", data.Phone_Number).Count(&count_phone_number)
 	if db.Error != nil {
 		return db.Error
 	}
 
 	if count_phone_number > 0 {
-		return errors.New("ERROR: Email must be unique")
+		return errors.New("ERROR: Phone number must be unique")
 	}
 
 	candidate := T_Candidate{

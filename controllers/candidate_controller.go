@@ -77,7 +77,7 @@ func CreateCandidate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"meta": gin.H{
 				"status":  http.StatusBadRequest,
-				"message": "Failed to bind body request",
+				"message": err.Error(),
 			},
 		})
 		return
@@ -87,7 +87,7 @@ func CreateCandidate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"meta": gin.H{
 				"status":  http.StatusBadRequest,
-				"message": "Failed to insert new data",
+				"message": err.Error(),
 			},
 		})
 		return
