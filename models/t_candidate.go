@@ -22,10 +22,28 @@ func GetCandidates() (results []T_Candidate, err error) {
 	return results, err
 }
 
-func FindCandidates(candidate_id string) (result T_Candidate, err error) {
+func FindCandidate(candidate_id string) (result T_Candidate, err error) {
 	db := initializers.DB.Raw("SELECT * FROM t_candidate WHERE candidate_id = ?", candidate_id).Scan(&result)
 	if db.Error != nil {
 		err = db.Error
 	}
 	return result, err
+}
+
+func InsertCandidate(data T_Candidate) (err error) {
+	candidate := T_Candidate{
+		Email:        data.Email,
+		Phone_Number: data.Phone_Number,
+		Full_Name:    data.Full_Name,
+		DOB:          data.DOB,
+		POB:          data.POB,
+		Gender:       data.Gender,
+		Year_Exp:     data.Year_Exp,
+		Last_Salary:  data.Last_Salary,
+	}
+
+	if err = initializers.DB.Create(&candidate).Error; err != nil {
+		return err
+	}
+	return nil
 }

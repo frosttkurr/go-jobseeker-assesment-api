@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"go-jobseeker-assesment-api/models"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,9 +38,9 @@ func IndexCandidates(c *gin.Context) {
 	}
 }
 
-func ShowCandidates(c *gin.Context) {
+func ShowCandidate(c *gin.Context) {
 	id := c.Param("id")
-	candidate, err := models.FindCandidates(id)
+	candidate, err := models.FindCandidate(id)
 
 	if err == nil {
 		switch candidate.Candidate_ID {
@@ -67,4 +68,33 @@ func ShowCandidates(c *gin.Context) {
 			},
 		})
 	}
+}
+
+func CreateCandidate(c *gin.Context) {
+	var request_candidate models.T_Candidate
+
+	if err := c.ShouldBindJSON(&request_candidate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"meta": gin.H{
+				"status":  http.StatusBadRequest,
+				"message": "Failed to bind body request",
+			},
+		})
+	}
+
+	if err := models.InsertCandidate(request_candidate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"meta": gin.H{
+				"status":  http.StatusBadRequest,
+				"message": "Failed to insert new data",
+			},
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"meta": gin.H{
+			"status":  http.StatusOK,
+			"message": "Successfully insert new data",
+		},
+	})
 }
