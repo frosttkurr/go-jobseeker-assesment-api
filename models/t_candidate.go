@@ -27,6 +27,7 @@ func GetCandidates(page, page_size int) (results []T_Candidate, page_total_data 
 	if db.Error != nil {
 		err = db.Error
 	}
+
 	page_total_data = len(results)
 	initializers.DB.Table("t_candidate").Count(&total_data)
 	return results, page_total_data, total_data, err
@@ -74,9 +75,9 @@ func inputValidator(data T_Candidate) (err error) {
 	return nil
 }
 
-func InsertCandidate(data T_Candidate) (err error, status_code int) {
+func InsertCandidate(data T_Candidate) (status_code int, err error) {
 	if err := inputValidator(data); err != nil {
-		return err, 400
+		return 400, nil
 	}
 
 	candidate := T_Candidate{
@@ -91,19 +92,19 @@ func InsertCandidate(data T_Candidate) (err error, status_code int) {
 	}
 
 	if err = initializers.DB.Create(&candidate).Error; err != nil {
-		return err, 500
+		return 500, err
 	}
-	return nil, 200
+	return 200, nil
 }
 
-func UpdateCandidate(id int, data T_Candidate) (err error, status_code int) {
+func UpdateCandidate(id int, data T_Candidate) (status_code int, err error) {
 	result, _ := FindCandidate(id)
 	if result.Candidate_ID == 0 {
-		return errors.New("ERROR: Candidate ID not found"), 404
+		return 404, errors.New("ERROR: Candidate ID not found")
 	}
 
 	if err := inputValidator(data); err != nil {
-		return err, 400
+		return 400, err
 	}
 
 	candidate := T_Candidate{
@@ -118,19 +119,19 @@ func UpdateCandidate(id int, data T_Candidate) (err error, status_code int) {
 	}
 
 	if err = initializers.DB.Model(&T_Candidate{}).Where("candidate_id", id).Updates(&candidate).Error; err != nil {
-		return err, 500
+		return 500, err
 	}
-	return nil, 200
+	return 200, nil
 }
 
-func DeleteCandidate(candidate_id int) (err error, status_code int) {
+func DeleteCandidate(candidate_id int) (status_code int, err error) {
 	result, _ := FindCandidate(candidate_id)
 	if result.Candidate_ID == 0 {
-		return errors.New("ERROR: Candidate ID not found"), 404
+		return 404, errors.New("ERROR: Candidate ID not found")
 	}
 
 	if err = initializers.DB.Delete(&T_Candidate{}, candidate_id).Error; err != nil {
-		return err, 500
+		return 500, err
 	}
-	return nil, 200
+	return 200, nil
 }

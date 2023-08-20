@@ -88,7 +88,7 @@ func CreateCandidate(c *gin.Context) {
 		return
 	}
 
-	err, status_code := models.InsertCandidate(request_candidate)
+	status_code, err := models.InsertCandidate(request_candidate)
 	if err != nil {
 		c.JSON(status_code, gin.H{
 			"meta": gin.H{
@@ -121,7 +121,7 @@ func UpdateCandidate(c *gin.Context) {
 		return
 	}
 
-	err, status_code := models.UpdateCandidate(helpers.StringToNumber(id), request_candidate)
+	status_code, err := models.UpdateCandidate(helpers.StringToNumber(id), request_candidate)
 	if err != nil {
 		c.JSON(status_code, gin.H{
 			"meta": gin.H{
@@ -143,7 +143,7 @@ func UpdateCandidate(c *gin.Context) {
 func DeleteCandidate(c *gin.Context) {
 	id := c.Param("id")
 
-	err, status_code := models.DeleteCandidate(helpers.StringToNumber(id))
+	status_code, err := models.DeleteCandidate(helpers.StringToNumber(id))
 	if err != nil {
 		c.JSON(status_code, gin.H{
 			"meta": gin.H{
