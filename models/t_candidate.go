@@ -70,9 +70,9 @@ func inputValidator(data T_Candidate) (err error) {
 	return nil
 }
 
-func InsertCandidate(data T_Candidate) (err error) {
+func InsertCandidate(data T_Candidate) (err error, status_code int) {
 	if err := inputValidator(data); err != nil {
-		return err
+		return err, 400
 	}
 
 	candidate := T_Candidate{
@@ -87,9 +87,9 @@ func InsertCandidate(data T_Candidate) (err error) {
 	}
 
 	if err = initializers.DB.Create(&candidate).Error; err != nil {
-		return err
+		return err, 500
 	}
-	return nil
+	return nil, 200
 }
 
 func UpdateCandidate(id int, data T_Candidate) (err error, status_code int) {

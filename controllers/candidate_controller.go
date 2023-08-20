@@ -74,29 +74,30 @@ func ShowCandidate(c *gin.Context) {
 func CreateCandidate(c *gin.Context) {
 	var request_candidate models.T_Candidate
 
-	if err := c.ShouldBindJSON(&request_candidate); err != nil {
+	if err_input := c.ShouldBindJSON(&request_candidate); err_input != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"meta": gin.H{
 				"status":  http.StatusBadRequest,
+				"message": err_input.Error(),
+			},
+		})
+		return
+	}
+
+	err, status_code := models.InsertCandidate(request_candidate)
+	if err != nil {
+		c.JSON(status_code, gin.H{
+			"meta": gin.H{
+				"status":  status_code,
 				"message": err.Error(),
 			},
 		})
 		return
 	}
 
-	if err := models.InsertCandidate(request_candidate); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"meta": gin.H{
-				"status":  http.StatusBadRequest,
-				"message": err.Error(),
-			},
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(status_code, gin.H{
 		"meta": gin.H{
-			"status":  http.StatusOK,
+			"status":  status_code,
 			"message": "Successfully insert new data",
 		},
 	})
@@ -106,11 +107,11 @@ func UpdateCandidate(c *gin.Context) {
 	var request_candidate models.T_Candidate
 	id := c.Param("id")
 
-	if err := c.ShouldBindJSON(&request_candidate); err != nil {
+	if err_input := c.ShouldBindJSON(&request_candidate); err_input != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"meta": gin.H{
 				"status":  http.StatusBadRequest,
-				"message": err.Error(),
+				"message": err_input.Error(),
 			},
 		})
 		return
