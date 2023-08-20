@@ -92,14 +92,14 @@ func InsertCandidate(data T_Candidate) (err error) {
 	return nil
 }
 
-func UpdateCandidate(id int, data T_Candidate) (err error) {
+func UpdateCandidate(id int, data T_Candidate) (err error, status_code int) {
 	result, _ := FindCandidate(id)
 	if result.Candidate_ID == 0 {
-		return errors.New("ERROR: Candidate ID not found")
+		return errors.New("ERROR: Candidate ID not found"), 404
 	}
 
 	if err := inputValidator(data); err != nil {
-		return err
+		return err, 400
 	}
 
 	candidate := T_Candidate{
@@ -114,19 +114,19 @@ func UpdateCandidate(id int, data T_Candidate) (err error) {
 	}
 
 	if err = initializers.DB.Model(&T_Candidate{}).Where("candidate_id", id).Updates(&candidate).Error; err != nil {
-		return err
+		return err, 500
 	}
-	return nil
+	return nil, 200
 }
 
 func DeleteCandidate(candidate_id int) (err error, status_code int) {
 	result, _ := FindCandidate(candidate_id)
 	if result.Candidate_ID == 0 {
-		return errors.New("ERROR: Candidate ID not found"), 204
+		return errors.New("ERROR: Candidate ID not found"), 404
 	}
 
 	if err = initializers.DB.Delete(&T_Candidate{}, candidate_id).Error; err != nil {
-		return err, 400
+		return err, 500
 	}
 	return nil, 200
 }

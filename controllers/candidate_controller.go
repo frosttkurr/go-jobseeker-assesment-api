@@ -116,19 +116,20 @@ func UpdateCandidate(c *gin.Context) {
 		return
 	}
 
-	if err := models.UpdateCandidate(helpers.StringToNumber(id), request_candidate); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+	err, status_code := models.UpdateCandidate(helpers.StringToNumber(id), request_candidate)
+	if err != nil {
+		c.JSON(status_code, gin.H{
 			"meta": gin.H{
-				"status":  http.StatusBadRequest,
+				"status":  status_code,
 				"message": err.Error(),
 			},
 		})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(status_code, gin.H{
 		"meta": gin.H{
-			"status":  http.StatusOK,
+			"status":  status_code,
 			"message": "Successfully update data",
 		},
 	})
