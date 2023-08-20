@@ -35,21 +35,21 @@ CREATE TABLE `t_candidate` (
 
 /*Data for the table `t_candidate` */
 
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (1,'email1@example.com','1234567890','John Doe','1990-01-01','City1','M','< 1 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (2,'email2@example.com','9876543210','Jane Smith','1995-02-15','City2','F','2 - 3 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (3,'email3@example.com','5555555555','Alice Johnson','1998-05-20','City3','F','3 - 4 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (4,'email4@example.com','9999999999','Bob Williams','1987-09-10','City4','M','> 5 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (5,'email5@example.com','1111111111','Emily Davis','1993-07-08','City5','F','> 5 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (6,'email6@example.com','7777777777','Michael Brown','1985-04-25','City6','M','3 - 4 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (7,'email7@example.com','3333333333','Olivia Lee','2000-03-12','City7','F','2 - 3 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (8,'email8@example.com','4444444444','William Jones','1992-11-30','City8','M','< 1 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (9,'email9@example.com','6666666666','Sophia Miller','1996-12-18','City9','F','< 1 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (10,'email10@example.com','8888888888','James Watson','1989-08-05','City10','M','2 - 3 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (11,'email11@example.com','9999999999','Kyle Wilson','1989-08-05','City10','M','3 - 4 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (12,'email12@example.com','1010101010','Triya Waymen','1989-08-05','City10','M','> 5 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (13,'email13@example.com','1111111111','Plyio Iosas','1989-08-05','City10','M','3 - 4 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (14,'email14@example.com','1212121212','James Wilson','1989-08-05','City10','M','< 1 years','Rp4.000.000');
-insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (15,'email15@example.com','1313131313','James Iopdf','1989-08-05','City10','M','< 1 years','Rp4.000.000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (1,'email1@example.com','1234567890','John Doe','1990-01-01','City1','M','< 1 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (2,'email2@example.com','9876543210','Jane Smith','1995-02-15','City2','F','2 - 3 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (3,'email3@example.com','5555555555','Alice Johnson','1998-05-20','City3','F','3 - 4 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (4,'email4@example.com','9999999999','Bob Williams','1987-09-10','City4','M','> 5 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (5,'email5@example.com','1111111111','Emily Davis','1993-07-08','City5','F','> 5 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (6,'email6@example.com','7777777777','Michael Brown','1985-04-25','City6','M','3 - 4 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (7,'email7@example.com','3333333333','Olivia Lee','2000-03-12','City7','F','2 - 3 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (8,'email8@example.com','4444444444','William Jones','1992-11-30','City8','M','< 1 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (9,'email9@example.com','6666666666','Sophia Miller','1996-12-18','City9','F','< 1 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (10,'email10@example.com','8888888888','James Watson','1989-08-05','City10','M','2 - 3 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (11,'email11@example.com','9999999999','Kyle Wilson','1989-08-05','City10','M','3 - 4 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (12,'email12@example.com','1010101010','Triya Waymen','1989-08-05','City10','M','> 5 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (13,'email13@example.com','1111111111','Plyio Iosas','1989-08-05','City10','M','3 - 4 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (14,'email14@example.com','1212121212','James Wilson','1989-08-05','City10','M','< 1 years','4000000');
+insert  into `t_candidate`(`candidate_id`,`email`,`phone_number`,`full_name`,`dob`,`pob`,`gender`,`year_exp`,`last_salary`) values (15,'email15@example.com','1313131313','James Iopdf','1989-08-05','City10','M','< 1 years','4000000');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
