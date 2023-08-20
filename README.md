@@ -1,1 +1,1 @@
-# go-jobseeker-assesment-fullstack
+# go-jobseeker-assesment-api
