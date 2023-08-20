@@ -107,7 +107,7 @@ func InsertCandidate(data T_Candidate) (status_code int, err error) {
 func UpdateCandidate(id int, data T_Candidate) (status_code int, err error) {
 	result, _ := FindCandidate(id)
 	if result.Candidate_ID == 0 {
-		return 404, errors.New("ERROR: Candidate ID not found")
+		return 404, errors.New("ERROR: Candidate data not found")
 	}
 
 	if err := inputValidator(data); err != nil {
@@ -134,7 +134,7 @@ func UpdateCandidate(id int, data T_Candidate) (status_code int, err error) {
 func DeleteCandidate(candidate_id int) (status_code int, err error) {
 	result, _ := FindCandidate(candidate_id)
 	if result.Candidate_ID == 0 {
-		return 404, errors.New("ERROR: Candidate ID not found")
+		return 404, errors.New("ERROR: Candidate data not found")
 	}
 
 	if err = initializers.DB.Delete(&T_Candidate{}, candidate_id).Error; err != nil {
