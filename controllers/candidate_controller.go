@@ -14,25 +14,25 @@ func IndexCandidates(c *gin.Context) {
 	if err == nil {
 		switch {
 		case len(candidates) <= 0:
-			c.JSON(http.StatusNoContent, gin.H{
+			c.JSON(204, gin.H{
 				"meta": gin.H{
-					"status":  http.StatusNoContent,
+					"status":  204,
 					"message": "No data found",
 				},
 			})
 		default:
-			c.JSON(http.StatusOK, gin.H{
+			c.JSON(200, gin.H{
 				"meta": gin.H{
-					"status":  http.StatusOK,
+					"status":  200,
 					"message": "Successfully retrieve data",
 				},
 				"result": candidates,
 			})
 		}
 	} else {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.JSON(500, gin.H{
 			"meta": gin.H{
-				"status":  http.StatusInternalServerError,
+				"status":  500,
 				"message": "Failed to retrieve data",
 			},
 		})
