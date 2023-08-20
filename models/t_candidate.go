@@ -17,7 +17,7 @@ type T_Candidate struct {
 	POB          string `json:"pob" validate:"required"`
 	Gender       string `json:"gender" validate:"required"`
 	Year_Exp     string `json:"year_exp" validate:"required"`
-	Last_Salary  string `json:"last_salary" validate:"required"`
+	Last_Salary  string `json:"last_salary"`
 }
 
 func GetCandidates(page, page_size int, filters map[string]string) (results []T_Candidate, page_total_data int, total_data int64, err error) {
