@@ -4,13 +4,15 @@ import (
 	"go-jobseeker-assesment-api/helpers"
 	"go-jobseeker-assesment-api/models"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func IndexCandidates(c *gin.Context) {
-	candidates, err := models.GetCandidates()
-
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	page_size, _ := strconv.Atoi(c.DefaultQuery("pageSize", "10"))
+	candidates, page_total_data, total_data, err := models.GetCandidates(page, page_size)
 	if err == nil {
 		switch {
 		case len(candidates) <= 0:
@@ -26,7 +28,9 @@ func IndexCandidates(c *gin.Context) {
 					"status":  200,
 					"message": "Successfully retrieve data",
 				},
-				"result": candidates,
+				"result":          candidates,
+				"page_total_data": page_total_data,
+				"total_data":      total_data,
 			})
 		}
 	} else {

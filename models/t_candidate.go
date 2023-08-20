@@ -20,12 +20,17 @@ type T_Candidate struct {
 	Last_Salary  string `json:"last_salary" validate:"required"`
 }
 
-func GetCandidates() (results []T_Candidate, err error) {
-	db := initializers.DB.Raw("SELECT * FROM t_candidate").Scan(&results)
+func GetCandidates(page, page_size int) (results []T_Candidate, page_total_data int, total_data int64, err error) {
+	offset := (page - 1) * page_size
+	query := initializers.DB.Table("t_candidate").Offset(offset).Limit(page_size)
+	db := query.Scan(&results)
 	if db.Error != nil {
 		err = db.Error
 	}
-	return results, err
+
+	page_total_data = len(results)
+	initializers.DB.Table("t_candidate").Count(&total_data)
+	return results, page_total_data, total_data, err
 }
 
 func FindCandidate(candidate_id int) (result T_Candidate, err error) {
