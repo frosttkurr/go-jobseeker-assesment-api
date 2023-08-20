@@ -15,7 +15,7 @@ func IndexCandidates(c *gin.Context) {
 	candidates, page_total_data, total_data, err := models.GetCandidates(page, page_size)
 	if err == nil {
 		switch {
-		case len(candidates) <= 0:
+		case total_data <= 0:
 			c.JSON(204, gin.H{
 				"meta": gin.H{
 					"status":  204,
