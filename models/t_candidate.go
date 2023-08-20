@@ -27,7 +27,6 @@ func GetCandidates(page, page_size int) (results []T_Candidate, page_total_data 
 	if db.Error != nil {
 		err = db.Error
 	}
-
 	page_total_data = len(results)
 	initializers.DB.Table("t_candidate").Count(&total_data)
 	return results, page_total_data, total_data, err
