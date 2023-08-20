@@ -36,7 +36,7 @@ func FindCandidate(candidate_id int) (result T_Candidate, err error) {
 	return result, err
 }
 
-func dataValidator(data T_Candidate) (err error) {
+func inputValidator(data T_Candidate) (err error) {
 	var db *gorm.DB
 	var count_email, count_phone_number int64
 
@@ -71,7 +71,7 @@ func dataValidator(data T_Candidate) (err error) {
 }
 
 func InsertCandidate(data T_Candidate) (err error) {
-	if err := dataValidator(data); err != nil {
+	if err := inputValidator(data); err != nil {
 		return err
 	}
 
@@ -98,7 +98,7 @@ func UpdateCandidate(id int, data T_Candidate) (err error) {
 		return errors.New("ERROR: Candidate ID not found")
 	}
 
-	if err := dataValidator(data); err != nil {
+	if err := inputValidator(data); err != nil {
 		return err
 	}
 
@@ -117,4 +117,16 @@ func UpdateCandidate(id int, data T_Candidate) (err error) {
 		return err
 	}
 	return nil
+}
+
+func DeleteCandidate(candidate_id int) (err error, status_code int) {
+	result, _ := FindCandidate(candidate_id)
+	if result.Candidate_ID == 0 {
+		return errors.New("ERROR: Candidate ID not found"), 204
+	}
+
+	if err = initializers.DB.Delete(&T_Candidate{}, candidate_id).Error; err != nil {
+		return err, 400
+	}
+	return nil, 200
 }

@@ -23,6 +23,7 @@ func main() {
 			candidates.GET("/:id", controllers.ShowCandidate)
 			candidates.POST("/", controllers.CreateCandidate)
 			candidates.PUT("/:id", controllers.UpdateCandidate)
+			candidates.DELETE("/:id", controllers.DeleteCandidate)
 		}
 	}
 

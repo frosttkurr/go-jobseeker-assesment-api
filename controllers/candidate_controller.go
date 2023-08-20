@@ -14,25 +14,25 @@ func IndexCandidates(c *gin.Context) {
 	if err == nil {
 		switch {
 		case len(candidates) <= 0:
-			c.JSON(204, gin.H{
+			c.JSON(http.StatusNoContent, gin.H{
 				"meta": gin.H{
-					"status":  204,
+					"status":  http.StatusNoContent,
 					"message": "No data found",
 				},
 			})
 		default:
-			c.JSON(200, gin.H{
+			c.JSON(http.StatusOK, gin.H{
 				"meta": gin.H{
-					"status":  200,
+					"status":  http.StatusOK,
 					"message": "Successfully retrieve data",
 				},
 				"result": candidates,
 			})
 		}
 	} else {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"meta": gin.H{
-				"status":  500,
+				"status":  http.StatusInternalServerError,
 				"message": "Failed to retrieve data",
 			},
 		})
@@ -129,7 +129,29 @@ func UpdateCandidate(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"meta": gin.H{
 			"status":  http.StatusOK,
-			"message": "Successfully insert new data",
+			"message": "Successfully update data",
+		},
+	})
+}
+
+func DeleteCandidate(c *gin.Context) {
+	id := c.Param("id")
+
+	err, status_code := models.DeleteCandidate(helpers.StringToNumber(id))
+	if err != nil {
+		c.JSON(status_code, gin.H{
+			"meta": gin.H{
+				"status":  status_code,
+				"message": err.Error(),
+			},
+		})
+		return
+	}
+
+	c.JSON(status_code, gin.H{
+		"meta": gin.H{
+			"status":  status_code,
+			"message": "Successfully delete data",
 		},
 	})
 }
