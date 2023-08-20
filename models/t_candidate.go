@@ -84,7 +84,7 @@ func inputValidator(data T_Candidate) (err error) {
 
 func InsertCandidate(data T_Candidate) (status_code int, err error) {
 	if err := inputValidator(data); err != nil {
-		return 400, nil
+		return 400, err
 	}
 
 	candidate := T_Candidate{

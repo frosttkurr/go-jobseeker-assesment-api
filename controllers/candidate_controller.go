@@ -39,6 +39,8 @@ func IndexCandidates(c *gin.Context) {
 					"message": "Successfully retrieve data",
 				},
 				"result":          candidates,
+				"page":            page,
+				"page_size":       page_size,
 				"page_total_data": page_total_data,
 				"total_data":      total_data,
 			})
