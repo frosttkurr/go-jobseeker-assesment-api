@@ -20,9 +20,16 @@ type T_Candidate struct {
 	Last_Salary  string `json:"last_salary" validate:"required"`
 }
 
-func GetCandidates(page, page_size int) (results []T_Candidate, page_total_data int, total_data int64, err error) {
+func GetCandidates(page, page_size int, filters map[string]string) (results []T_Candidate, page_total_data int, total_data int64, err error) {
 	offset := (page - 1) * page_size
 	query := initializers.DB.Table("t_candidate").Offset(offset).Limit(page_size)
+
+	for filter_name, filter_value := range filters {
+		if filter_value != "" {
+			query = query.Where(filter_name+" = ?", filter_value)
+		}
+	}
+
 	db := query.Scan(&results)
 	if db.Error != nil {
 		err = db.Error

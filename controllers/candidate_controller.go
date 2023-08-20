@@ -10,9 +10,19 @@ import (
 )
 
 func IndexCandidates(c *gin.Context) {
+	filters := map[string]string{
+		"email":        c.Query("email"),
+		"phone_number": c.Query("phoneNumber"),
+		"dob":          c.Query("dob"),
+		"pob":          c.Query("pob"),
+		"gender":       c.Query("gender"),
+		"year_exp":     c.Query("yearExp"),
+		"last_salary":  c.Query("lastSalary"),
+	}
+
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	page_size, _ := strconv.Atoi(c.DefaultQuery("pageSize", "10"))
-	candidates, page_total_data, total_data, err := models.GetCandidates(page, page_size)
+	candidates, page_total_data, total_data, err := models.GetCandidates(page, page_size, filters)
 	if err == nil {
 		switch {
 		case total_data <= 0:
