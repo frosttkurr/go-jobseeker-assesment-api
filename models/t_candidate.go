@@ -63,7 +63,7 @@ func inputValidator(data T_Candidate) (err error) {
 	}
 
 	if count_email > 0 {
-		return errors.New("ERROR: Email must be unique")
+		return errors.New("ERROR: Email already exist")
 	}
 
 	db = initializers.DB.Raw("SELECT COUNT(candidate_id) AS id FROM t_candidate WHERE phone_number = ?", data.Phone_Number).Scan(&count_phone_number)
@@ -72,7 +72,7 @@ func inputValidator(data T_Candidate) (err error) {
 	}
 
 	if count_phone_number > 0 {
-		return errors.New("ERROR: Phone number must be unique")
+		return errors.New("ERROR: Phone number already exist")
 	}
 
 	if data.Gender != "M" && data.Gender != "F" {
